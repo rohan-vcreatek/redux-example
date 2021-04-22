@@ -1,25 +1,32 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
+import {createStore} from 'redux';
+import {Provider} from 'react-redux';
+import noteReducer from './reducer';
+import {
+  Paper
+} from '@material-ui/core/';
+import List from './components/list';
+import Delete from './components/delete';
+import AddNote from './components/addnote';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+const store = createStore(noteReducer,['First Note']);
+
+const App = () => {
+	return (
+    <Provider store={store}>
+      <Paper elevation={3} style={{
+            display : 'flex',
+            justifyContent : 'space-around',
+            alignItems : 'center',
+            padding : 20,
+            margin : 20
+        }}>
+            <Delete/>
+            <AddNote/>
+            <List />
+        </Paper>
+    </Provider>
+	);
 }
 
 export default App;
